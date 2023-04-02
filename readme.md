@@ -1,0 +1,2 @@
+Automated test of a [website](https://automationexercise.com/) using Java Selenium, TestNG and Page Object Model. 
+Each test case is represented in one test class and the test cases are taken from [this link](https://automationexercise.com/test_cases).
