@@ -2,9 +2,12 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.AccountCreatedPage;
 import pages.HomePage;
 import pages.LoginSignupPage;
 import pages.SignupPage;
@@ -29,11 +32,54 @@ public class RegisterUserTest extends BaseTest {
 
         Assert.assertEquals(signupPage.getEnterAccountInformation().getText().toUpperCase(), "ENTER ACCOUNT INFORMATION"); //8.
 
+        String day = "4";
+        String month = "April";
+        String year = "1970";
+        String country = "Canada";
+        String password = faker.internet().password();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String company = faker.company().name();
+        String address1 = faker.address().streetAddress();
+        String address2 = faker.address().streetAddress();
+        String state = faker.address().state();
+        String city = faker.address().city();
+        String zipcode = faker.address().zipCode();
+        String mobileNumber = faker.phoneNumber().cellPhone();
+
+        signupPage.fillOutDetails(password, firstName, lastName, company, address1,
+                address2, state, city, zipcode, mobileNumber);
+
+
         Select days = new Select(signupPage.getSelectDays());
-        days.selectByValue("4");
+        days.selectByValue(day);
+
+        Select months = new Select(signupPage.getSelectMonths());
+        months.selectByVisibleText(month);
+
+        Select years = new Select(signupPage.getSelectYears());
+        years.selectByVisibleText(year);
+
+        Select countries = new Select(signupPage.getSelectCountry());
+        countries.selectByVisibleText(country);
+
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        js.executeScript("arguments[0].scrollIntoView();", signupPage.getSubmitButton());
+
+        signupPage.getSubmitButton().click();
+
+        AccountCreatedPage accountCreatedPage = new AccountCreatedPage(webDriver, webDriverWait);
+        Assert.assertEquals(accountCreatedPage.getAccountCreated().getText(), "ACCOUNT CREATED!"); //14.
+
+        accountCreatedPage.getContinueButton().click();
+
+        WebElement ad = webDriver.findElement(By.xpath("//*[@id=\"card\"]"));
+        js.executeScript("arguments[0].style.visibility='hidden'", ad);
+
+        Assert.assertEquals(homePage.getLoggedInAs().getText(), "Logged in as" + name);
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

@@ -23,16 +23,16 @@ public class LoginSignupPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"form\"]/div/div/div[3]/div/form/button")
     private WebElement signupButton;
 
-    public void fillOutNameAndEmail(String name, String email) {
-        nameInput.sendKeys(name);
-        emailInput.sendKeys(email);
-    }
-
     public WebElement getNewUserSignupMessage() {
         return newUserSignupMessage;
     }
 
     public WebElement getSignupButton() {
         return signupButton;
+    }
+
+    public void fillOutNameAndEmail(String name, String email) {
+        nameInput.sendKeys(name);
+        emailInput.sendKeys(email);
     }
 }
