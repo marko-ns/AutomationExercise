@@ -27,6 +27,7 @@ public class RegisterUserTest extends BaseTest {
 
         String name = faker.name().name();
         String email = faker.internet().emailAddress();
+
         loginSignupPage.fillOutNameAndEmail(name, email);
         loginSignupPage.getSignupButton().click();
 
@@ -73,16 +74,7 @@ public class RegisterUserTest extends BaseTest {
 
         accountCreatedPage.getContinueButton().click();
 
-        WebElement ad = webDriver.findElement(By.xpath("//*[@id=\"card\"]"));
-        js.executeScript("arguments[0].style.visibility='hidden'", ad);
-
-        Assert.assertEquals(homePage.getLoggedInAs().getText(), "Logged in as" + name);
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Assert.assertEquals(homePage.getLoggedInAs().getText(), "Logged in as " + name);
     }
 
 }

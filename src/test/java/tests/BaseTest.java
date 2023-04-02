@@ -22,6 +22,7 @@ public abstract class BaseTest {
     public void beforeClass() {
         this.chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
+        chromeOptions.addArguments("load-extension=C:\\Users\\Marko\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\cjpalhdlnbpafiamejdnhcphjbkeiagm\\1.48.0_0");
         this.webDriver = new ChromeDriver(chromeOptions);
         this.webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(20));
 
