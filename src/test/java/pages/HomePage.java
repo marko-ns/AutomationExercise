@@ -17,6 +17,20 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[10]/a")
     private WebElement loggedInAs;
 
+    @FindBy(xpath = "//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[5]/a")
+    private WebElement deleteAccountButton;
+
+    @FindBy(xpath = "//*[@id=\"form\"]/div/div/div/h2/b")
+    private WebElement accountDeleted;
+
+    public WebElement getAccountDeleted() {
+        return accountDeleted;
+    }
+
+    public WebElement getDeleteAccountButton() {
+        return deleteAccountButton;
+    }
+
     public WebElement getLoggedInAs() {
         return loggedInAs;
     }

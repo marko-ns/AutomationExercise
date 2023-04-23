@@ -73,6 +73,9 @@ public class RegisterUserTest extends BaseTest {
         accountCreatedPage.getContinueButton().click();
 
         Assert.assertEquals(homePage.getLoggedInAs().getText(), "Logged in as " + name);
+
+        homePage.getDeleteAccountButton().click();
+        Assert.assertEquals(homePage.getAccountDeleted().getText(), "ACCOUNT DELETED!");
     }
 
 }
